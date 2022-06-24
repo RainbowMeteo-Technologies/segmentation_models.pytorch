@@ -65,6 +65,7 @@ class Unet(SegmentationModel):
         classes: int = 1,
         activation: Optional[Union[str, callable]] = None,
         aux_params: Optional[dict] = None,
+        interpolation_mode='bilinear'
     ):
         super().__init__()
 
@@ -82,6 +83,7 @@ class Unet(SegmentationModel):
             use_batchnorm=decoder_use_batchnorm,
             center=True if encoder_name.startswith("vgg") else False,
             attention_type=decoder_attention_type,
+            interpolation_mode=interpolation_mode,
         )
 
         self.segmentation_head = SegmentationHead(
